@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "nodemon index.js",
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "seedDB": "mysql -u root < ./db/schema.sql; ./node_modules/.bin/knex --knexfile ./db/knexfile.js  migrate:latest; ./node_modules/.bin/knex --knexfile ./db/knexfile.js seed:run"
   },
   "author": "Troy McLaughlin",
   "license": "ISC",
@@ -13,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "knex": "^0.20.10",
     "mysql": "^2.18.1",
     "react": "^16.13.0",
