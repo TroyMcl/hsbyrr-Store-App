@@ -1,12 +1,11 @@
 
 exports.up = function(knex) {
-  knex.schema.createTable('orders', table => {
+  return knex.schema.createTable('orders', table => {
     table.increments('id');
     table.timestamp('order-time');
     table.integer('products')
     table.integer('user-id').unsigned()
-    table.foreign('user-id').references('id').inTable('users')
-    onDelete('CASCADE')
+    table.foreign('user-id').references('id').inTable('users').onDelete('CASCADE')
   })
 };
 

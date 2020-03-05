@@ -10,23 +10,32 @@ module.exports = {
       password: null,
       database: 'scents',
       port: 3306,
-    }
+    },
+    migrations: {
+      directory: './migrations',
+    },
+    seeds: {
+      directory: './seeds'
+    },
+    useNullAsDefault: true
   },
 
   staging: {
-    client: 'postgresql',
+    client: 'mysql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
+      host: 'localhost',
+      user: 'root',
+      password: null,
+      database: 'scents',
+      port: 3306,
     },
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: './migrations',
+    },
+    seeds: {
+      directory: './seeds'
+    },
+    useNullAsDefault: true
   },
 
   production: {

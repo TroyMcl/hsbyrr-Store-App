@@ -2,11 +2,14 @@
 exports.up = function(knex) {
   return knex.schema.createTable('products', table => {
     table.increments('id');
-    table.string('img-small');
-    table.string('img-large');
-    table.string('description');
+    table.string('imgSmall');
+    table.string('imgLarge');
+    table.string('itemName');
     table.integer('price');
-    table.boolean('stock');
+    table.integer('numInstock');
+    table.string('materials');
+    table.text('description');
+    table.string('shippingCost');
   })
 };
 
