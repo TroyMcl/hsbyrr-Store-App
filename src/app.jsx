@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Shop from './components/shop.jsx'
+import Item from './components/item.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'store',
+      page: 'product',
       products: [],
+      selectedProd: {
+        imgLarge: 'http://lorempixel.com/640/480/abstract',
+        itemName: 'Incredible Cotton Towels',
+        price: '457.00',
+        inStock: true,
+        materials: 'Voluptas voluptatem voluptatum sit sed laboriosam quis voluptas ducimus omnis.',
+        description: 'Natus officia unde in. Ducimus commodi vitae est quos tempore pariatur. Animi ad saepe voluptas dolores eos et in reiciendis accusamus. Dicta neque et cumque et alias.',
+        shippingCost: 'FREE',
+        productId: 'ID2',
+        onSale: false
+      }
     }
   }
 
@@ -29,7 +41,13 @@ class App extends React.Component {
           <Shop products={this.state.products}/>
         </div>
       );
-
+    }
+    if (this.state.page === 'product') {
+      return (
+        <div>
+          <Item item={this.state.selectedProd} />
+        </div>
+      )
     }
   }
 }

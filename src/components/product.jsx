@@ -1,5 +1,5 @@
 import React from 'react';
-
+//template for products to display in store
 function Product({ product }) {
   return (
     <div>
