@@ -6,10 +6,12 @@ exports.up = function(knex) {
     table.string('imgLarge');
     table.string('itemName');
     table.integer('price');
-    table.integer('numInstock');
+    table.boolean('inStock');
     table.string('materials');
     table.text('description');
     table.string('shippingCost');
+    table.string('productId');
+    table.boolean('onSale');
   })
 };
 
