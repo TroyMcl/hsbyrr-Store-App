@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Shop from './components/shop.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class App extends React.Component {
       return (
         <div>
           <h1>Webpack, react and server test!</h1>
-
+          <Shop products={this.state.products}/>
         </div>
       );
 
