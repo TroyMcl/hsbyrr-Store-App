@@ -5,16 +5,31 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      check: 1
+      page: 'store',
+      products: [],
     }
   }
 
+  componentDidMount() {
+    fetch(`/products`, {
+      method: 'get',
+    })
+    .then((response) => response.json())
+    .then((prods) => this.setState({products: prods}))
+  }
+
   render() {
-    return (
-      <div>
-        <h1>Webpack, react and server test!</h1>
-      </div>
-    );
+    //options 'store', 'product'
+
+    if (this.state.page === 'store') {
+      return (
+        <div>
+          <h1>Webpack, react and server test!</h1>
+
+        </div>
+      );
+
+    }
   }
 }
 
