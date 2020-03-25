@@ -1,25 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Shop from './components/shop.jsx'
-import Item from './components/item.jsx'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Shop from './components/shop.jsx';
+import NavBar from './components/NavBar.jsx'
+import Item from './components/item.jsx';
+import ButtonAppBar from './components/NavBar.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'product',
+      page: 'store',
       products: [],
-      selectedProd: {
-        imgLarge: 'http://lorempixel.com/640/480/abstract',
-        itemName: 'Incredible Cotton Towels',
-        price: '457.00',
-        inStock: true,
-        materials: 'Voluptas voluptatem voluptatum sit sed laboriosam quis voluptas ducimus omnis.',
-        description: 'Natus officia unde in. Ducimus commodi vitae est quos tempore pariatur. Animi ad saepe voluptas dolores eos et in reiciendis accusamus. Dicta neque et cumque et alias.',
-        shippingCost: 'FREE',
-        productId: 'ID2',
-        onSale: false
-      }
+      searchString: '',
+    }
+  }
+  //this might need adjusted to work with my code
+  onSearchInputChange(e) {
+    if (e.target.value) {
+      this.setState({searchString: e.target.value})
+    } else {
+      this.setState({searchString: ''})
     }
   }
 
@@ -32,23 +33,12 @@ class App extends React.Component {
   }
 
   render() {
-    //options 'store', 'product'
-
-    if (this.state.page === 'store') {
-      return (
-        <div>
-          <h1>Webpack, react and server test!</h1>
-          <Shop products={this.state.products}/>
-        </div>
-      );
-    }
-    if (this.state.page === 'product') {
-      return (
-        <div>
-          <Item item={this.state.selectedProd} />
-        </div>
-      )
-    }
+    return (
+      <div>
+        <ButtonAppBar />
+        <Shop products={this.state.products}/>
+      </div>
+    );
   }
 }
 
