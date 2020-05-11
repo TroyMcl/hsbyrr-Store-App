@@ -1,29 +1,22 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import products from '../apis/products';
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      products: []
-    }
-  };
+import StoreList from './StoreList';
 
-  componentDidMount() {
-    products.get('/products')
-    .then(prod => {
-      this.setState({ products: prod.data.data.products });
-      console.log(prod.data.data.products)
-    })
-  };
-
-  render () {
-    return (
+const App = () => {
+  return (
     <div>
-      <p>Stuff from server here</p>
+      <BrowserRouter>
+      <div>
+        <Switch>
+          <Route path="/" exact component={StoreList} />
+        </Switch>
+      </div>
+
+      </BrowserRouter>
     </div>
-    )
-  }
+  )
 }
 
 export default App;
