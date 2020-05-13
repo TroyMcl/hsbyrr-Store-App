@@ -8,6 +8,7 @@ class StoreList extends React.Component {
     this.state = {
       products: [],
     }
+    this.selectItem =  this.selectItem.bind(this);
   }
 
   componentDidMount() {
@@ -17,6 +18,10 @@ class StoreList extends React.Component {
     })
   };
 
+  selectItem(e) {
+    console.log(e)
+  }
+
   render() {
     if (this.state.products.length === 0) {
       return <div>No products</div>
@@ -25,7 +30,7 @@ class StoreList extends React.Component {
     return (
       <div className="ui items">
         {this.state.products.map(product => {
-          return <StoreItem product={product} key={product.prodId}/>
+          return <StoreItem product={product} key={product.prodId} selectItem={this.selectItem}/>
         })}
       </div>
     )

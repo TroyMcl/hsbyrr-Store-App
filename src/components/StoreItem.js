@@ -1,14 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import ItemView from './ItemView';
 
 const StoreItem = ({product}) => {
-  const { image, itemName, materials, description, shippingCost } = product;
+  const { image, itemName, materials, description, shippingCost, prodId } = product;
   return (
     <div className="item">
       <div className="image">
         <img src={image[0]} />
       </div>
       <div className="content">
-        <a className="header">{itemName}</a>
+        <Link className="header" to={`/product/${prodId}`}>{itemName}</Link>
         <div className="meta">
           <span>Description</span>
           <p>{description}</p>
