@@ -1,5 +1,5 @@
 import React from 'react';
-import products from '../apis/products';
+import products from '../../apis/products';
 
 class ItemView extends React.Component {
   constructor(props) {

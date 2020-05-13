@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ItemView from './ItemView';
 
-const StoreItem = ({product}) => {
+const StoreItem = ({ product, addToCart }) => {
   const { image, itemName, materials, description, shippingCost, prodId } = product;
   return (
     <div className="item">
@@ -19,6 +19,9 @@ const StoreItem = ({product}) => {
           <span>Materials</span>
           <p>{materials}</p>
         </div>
+        <button className="ui primary button" value={prodId} onClick={(e) => addToCart(e.target.value)}>
+          Add to cart
+        </button>
       </div>
 
     </div>

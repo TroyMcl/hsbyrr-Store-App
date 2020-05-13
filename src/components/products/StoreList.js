@@ -1,5 +1,5 @@
 import React from 'react';
-import products from '../apis/products';
+import products from '../../apis/products';
 import StoreItem from './StoreItem';
 
 class StoreList extends React.Component {
@@ -8,7 +8,6 @@ class StoreList extends React.Component {
     this.state = {
       products: [],
     }
-    this.selectItem =  this.selectItem.bind(this);
   }
 
   componentDidMount() {
@@ -18,19 +17,15 @@ class StoreList extends React.Component {
     })
   };
 
-  selectItem(e) {
-    console.log(e)
-  }
-
   render() {
     if (this.state.products.length === 0) {
       return <div>No products</div>
     }
-
+    console.log(this.props)
     return (
       <div className="ui items">
         {this.state.products.map(product => {
-          return <StoreItem product={product} key={product.prodId} selectItem={this.selectItem}/>
+          return <StoreItem product={product} key={product.prodId} addToCart={this.props.addToCart}/>
         })}
       </div>
     )
