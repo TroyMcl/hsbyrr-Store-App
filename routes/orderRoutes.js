@@ -1,13 +1,13 @@
 const express = require('express');
-const { saveOrder } = require('../controllers/orderControllers');
+const { saveOrder, getOrderById } = require('../controllers/orderControllers');
 const router = express.Router();
 
 router
   .route('/')
-  .post(saveOrder)
+  .post(saveOrder);
 
-// router
-//   .route('/:id')
-//   .get('get order by id')
+router
+  .route('/:id')
+  .get(getOrderById);
 
 module.exports = router;

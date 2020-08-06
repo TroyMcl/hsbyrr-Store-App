@@ -28,6 +28,9 @@ const orderSchema = new Schema({
   items: {
     type: [String],
   },
+  orderId: {
+    type: String
+  },
 });
 
 const Order = mongoose.model('Order', orderSchema);
