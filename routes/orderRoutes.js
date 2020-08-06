@@ -1,5 +1,5 @@
 const express = require('express');
-const { saveOrder, getOrderById } = require('../controllers/orderControllers');
+const { saveOrder, getOrderById, editOrderById } = require('../controllers/orderControllers');
 const router = express.Router();
 
 router
@@ -8,6 +8,7 @@ router
 
 router
   .route('/:id')
-  .get(getOrderById);
+  .get(getOrderById)
+  .patch(editOrderById);
 
 module.exports = router;

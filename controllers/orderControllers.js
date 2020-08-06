@@ -6,12 +6,12 @@ exports.saveOrder = async (req, res) => {
     res.status(201).json({
       message: 'order completed',
       data: newOrder,
-    })
+    });
   } catch (err) {
     res.status(400).json({
       status: 'error',
       message: err,
-    })
+    });
   }
 };
 
@@ -22,12 +22,30 @@ exports.getOrderById = async (req, res) => {
       status: 'success',
       data: {
         order
-      }
-    })
+      },
+    });
   } catch (err) {
     res.status(400).json({
       status: 'error',
       message: err,
-    })
+    });
+  }
+};
+
+exports.editOrderById = async (req, res) => {
+  let orderUpdate = req.body;
+  try {
+    const order = await Order.findOneAndUpdate({ orderId:req.params.id }, orderUpdate, { new: true });
+    res.status(201).json({
+      status: 'success',
+      data: {
+        order
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'error',
+      message: err,
+    });
   }
 };
