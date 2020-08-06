@@ -35,7 +35,7 @@ exports.getProductById = async (req, res) => {
 };
 
 exports.addProduct = async (req, res) => {
-  let productInfo = req.body
+  const productInfo = req.body
   try {
     const product = await Prod.updateOne({ prodId: productInfo.prodId }, productInfo, { upsert: true });
     res.status(201).json({
@@ -70,12 +70,19 @@ exports.deleteProduct = async (req, res) => {
 };
 
 exports.updateProduct = async (req, res) => {
-  // try {
-
-  // } catch (err) {
-  //   res.status(400).json({
-  //     status: 'failed',
-  //     message: err
-  //   });
-  // }
+  const productInfo = req.body;
+  try {
+    let product = await Prod.updateOne({ prodId: req.params.id }, productInfo, { new: true } );
+    res.status(201).json({
+      status: 'success',
+      data: {
+        product
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'failed',
+      message: err
+    });
+  }
 };

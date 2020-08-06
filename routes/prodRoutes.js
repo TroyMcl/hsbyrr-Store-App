@@ -18,6 +18,6 @@ router
 router
   .route('/edit/:id')
   .delete(deleteProduct)
-  .put(updateProduct);
+  .patch(updateProduct);
 
 module.exports = router;
