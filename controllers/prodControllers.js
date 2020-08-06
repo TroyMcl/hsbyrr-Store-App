@@ -3,7 +3,6 @@ const Prod = require('../models/prodModel');
 exports.getAllPorducts = async (req, res) => {
   try {
     let products = await Prod.find();
-    console.log(products)
     res.status(200).json({
       status: 'success',
       data: {
@@ -19,10 +18,8 @@ exports.getAllPorducts = async (req, res) => {
 };
 
 exports.getProductById = async (req, res) => {
-  console.log('hitting route?')
   try {
     const product = await Prod.findOne({prodId: req.params.id});
-    console.log(product)
     res.status(200).json({
       status: 'success',
       data: {
@@ -33,6 +30,24 @@ exports.getProductById = async (req, res) => {
     res.status(400).json({
       status: 'failure',
       message: err,
+    });
+  }
+};
+
+exports.addProduct = async (req, res) => {
+  let productInfo = req.body
+  try {
+    const product = await Prod.updateOne({ prodId: productInfo.prodId }, productInfo, { upsert: true });
+    res.status(201).json({
+      status: 'success',
+      data: {
+        product
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'failed',
+      message: err
     });
   }
 };
