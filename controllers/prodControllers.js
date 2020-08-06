@@ -19,7 +19,7 @@ exports.getAllPorducts = async (req, res) => {
 
 exports.getProductById = async (req, res) => {
   try {
-    const product = await Prod.findOne({prodId: req.params.id});
+    const product = await Prod.findOne({ prodId: req.params.id });
     res.status(200).json({
       status: 'success',
       data: {
@@ -50,4 +50,32 @@ exports.addProduct = async (req, res) => {
       message: err
     });
   }
+};
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    let product = await Prod.deleteOne({ prodId: req.params.id });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        product
+      }
+    })
+  } catch (err) {
+    res.status(400).json({
+      status: 'failed',
+      message: err
+    });
+  }
+};
+
+exports.updateProduct = async (req, res) => {
+  // try {
+
+  // } catch (err) {
+  //   res.status(400).json({
+  //     status: 'failed',
+  //     message: err
+  //   });
+  // }
 };
