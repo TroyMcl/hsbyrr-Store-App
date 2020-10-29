@@ -1,35 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import products from '../../apis/products';
 import StoreItem from './StoreItem';
+import { Grid } from '@material-ui/core';
 
-class StoreList extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      products: [],
-    }
-  }
+const StoreList = (props) => {
+  const [productList, setProductList] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     products.get('/products')
     .then(prod => {
-      this.setState({products: prod.data.data.products})
+      setProductList(prod.data.data.products);
     })
-  };
+  }, []);
 
-  render() {
-    if (this.state.products.length === 0) {
-      return <div>No products</div>
-    }
-    console.log(this.props)
-    return (
-      <div className="ui items">
-        {this.state.products.map(product => {
-          return <StoreItem product={product} key={product.prodId} addToCart={this.props.addToCart}/>
-        })}
-      </div>
-    )
+  if (productList.length === 0) {
+    return <div>Loading</div>
   }
-};
+
+  return (
+    <Grid container spacing={4}>
+      {productList.map(product => {
+        return (
+        <Grid item xs={12} sm={6} lg={4} key={product.prodId}>
+          <StoreItem product={product} addToCart={props.addToCart}/>
+        </Grid>
+        )
+      })}
+    </Grid>
+  )
+}
 
 export default StoreList;
