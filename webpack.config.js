@@ -9,15 +9,18 @@ module.exports = {
     path: DEST_Dir
   },
   module: {
-    rules : [
+    rules: [
       {
-        test: /\.(js|jsx)?/,
-        include: SRC_Dir,
-        exclude: /node_modules/,
+        test: /\.m?js$/,
+        exclude: /(node_modules)/,
         use: {
-          loader: `babel-loader`
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react']
+          }
         }
       }
     ]
   }
+
 }
