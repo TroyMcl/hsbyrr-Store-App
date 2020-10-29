@@ -1,56 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import products from '../apis/products';
+import { Grid } from '@material-ui/core';
 
 import StoreList from './products/StoreList';
 import Header from './Header';
 import ItemView from './products/ItemView';
 import Checkout from './checkout/Checkout';
+import Cart from './cart/Cart'
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      shoppingCart: [],
-    }
-    this.addToCart = this.addToCart.bind(this);
-  }
+const App = (props) => {
+  const [ shoppingCart, useShoppingCart ] = useState([]);
 
-  addToCart(item) {
-    console.log(item)
-    const shoppingCart = [...this.state.shoppingCart, item];
-    this.setState({ shoppingCart })
+  const addToCart = (e, item) => {
+    console.log(e, item);
+    const updatedShoppingCart = [...shoppingCart, item];
+    useShoppingCart(updatedShoppingCart);
   };
 
-  render() {
-    return (
-      <div className="ui container">
-        <BrowserRouter>
-        <div>
+  return (
+    <Grid container direction="column">
+      <BrowserRouter>
+        <Grid item>
           <Header />
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={(props) => <StoreList {...props} addToCart={this.addToCart}/>}
-            />
-            <Route
-              path="/product/:id"
-              exact
-              component={ItemView}
-            />
-            <Route
-              path="/cart"
-              exact
-              render={(props) => <Checkout {...props} shoppingCart={this.state.shoppingCart}/>}
-            />
-          </Switch>
-        </div>
-
-        </BrowserRouter>
-      </div>
-    )
-  }
+        </Grid>
+        <Grid item container>
+          <Grid item xs={1} sm={2} />
+            <Grid item xs={12} sm={8}>
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={(props) => <StoreList {...props} addToCart={addToCart}/>}
+              />
+              <Route
+                path="/product/:id"
+                exact
+                component={ItemView}
+              />
+              <Route
+                path="/cart"
+                exact
+                render={(props) => <Cart {...props} shoppingCart={shoppingCart}/>}
+              />
+              <Route
+                path="/checkout"
+                exact
+                render={(props) => <Checkout {...props} shoppingCart={shoppingCart}/>}
+              />
+              </Switch>
+            </Grid>
+          <Grid item xs={1} sm={2} />
+        </Grid>
+      </BrowserRouter>
+    </Grid>
+  )
 }
 
 export default App;
