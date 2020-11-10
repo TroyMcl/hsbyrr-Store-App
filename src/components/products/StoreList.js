@@ -7,7 +7,7 @@ const StoreList = (props) => {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    products.get('/products')
+    products.get('api/products')
     .then(prod => {
       setProductList(prod.data.data.products);
     })
@@ -18,10 +18,10 @@ const StoreList = (props) => {
   }
 
   return (
-    <Grid container spacing={4}>
+    <Grid container alignItems="stretch" spacing={4}>
       {productList.map(product => {
         return (
-        <Grid item xs={12} sm={6} lg={4} key={product.prodId}>
+        <Grid item xs={12} sm={6} md={5} lg={4} style={{display: "flex"}} key={product.prodId}>
           <StoreItem product={product} addToCart={props.addToCart}/>
         </Grid>
         )

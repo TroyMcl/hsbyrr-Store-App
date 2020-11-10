@@ -2,22 +2,30 @@ import React, { useState, useEffect } from 'react';
 import products from '../../apis/products';
 import { Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/styles';
 
 
 const ItemView = (props) => {
   const [ product ,setProduct ] = useState({});
 
   useEffect(() => {
-    products.get(`/products/${props.match.params.id}`)
+    products.get(`api/products/${props.match.params.id}`)
     .then(productInfo => {
       setProduct(productInfo.data.data.product);
     })
   }, [])
+  const useStyles = makeStyles({
+    mainImg: {
+      height: '300px',
+      margin: '15px'
+    }
+  })
 
+  const classes = useStyles();
   return (
     <Grid item container>
       <Grid item s={6} md={6}>
-        <img src={product.image} />
+        <img src={product.image} className={classes.mainImg} />
       </Grid>
       <Grid item s={6} md={6}>
         <h1>{product.itemName}</h1>
