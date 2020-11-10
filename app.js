@@ -7,8 +7,12 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static('public'));
+app.use('/product/:resource', (req, res) => {
+  const resource = req.params.resource !== 'bundle.js' ? 'index.html' : 'bundle.js'
+  res.sendFile(path.join(__dirname, 'public', resource))
+})
 
-app.use('/products', prodRoutes);
+app.use('/api/products', prodRoutes);
 app.use('/orders', orderRoutes);
 app.use('/users', userRoutes);
 
