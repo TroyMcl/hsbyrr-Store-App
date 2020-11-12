@@ -37,7 +37,8 @@ const Cart = (props) => {
       newTotal = total + items[index].price
       useTotal(newTotal)
     }
-    useItems([...items]);
+    // useItems([...items]);
+    props.adjustQty(item, change)
   }
 
   if (items.length === 0) {

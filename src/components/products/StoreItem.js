@@ -35,7 +35,7 @@ const StoreItem = ({ product, addToCart }) => {
         title={itemName}
       />
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom noWrap="true">
+        <Typography className={classes.title} color="textSecondary" gutterBottom noWrap={true}>
           Materials:
           <br/>
           {materials}
