@@ -42,13 +42,9 @@ Styling
 * Webpack
 
 ## Schema and API's
-Product Document Structure
-![Product Model](./images/product.jpeg)
-Order Document Structure
-![Order Model](./images/order.jpeg)
-User Document Structure
-![User Model](./images/user.jpeg)
 
-#### API Table
+![Models](./images/hsrrmodels.jpeg)
+
+### API Table
 
 ![API's](./images/hsrrapi.jpeg)
