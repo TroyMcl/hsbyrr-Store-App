@@ -22,7 +22,8 @@ const StoreList = (props) => {
       {productList.map(product => {
         return (
         <Grid item xs={12} sm={6} md={5} lg={4} style={{display: "flex"}} key={product.prodId}>
-          <StoreItem product={product} addToCart={props.addToCart}/>
+          {/* <StoreItem product={product} addToCart={props.addToCart}/> */}
+          <StoreItem product={product} />
         </Grid>
         )
       })}

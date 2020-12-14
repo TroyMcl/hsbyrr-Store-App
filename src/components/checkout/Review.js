@@ -25,8 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Review = (props) => {
-  const { items, stateObj } = props;
+const Review = ({ items, stateObj }) => {
   const { firstName, lastName, address1, address2, city, state, zipCode, cardName, cardNumber, expDate, cvv } = stateObj
   const classes = useStyles();
 

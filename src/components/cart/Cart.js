@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import products from '../../apis/products';
 import CheckOutItem from './CheckOutItem';
 import Button from '@material-ui/core/Button';
+import { ShoppingCartContext } from '../shoppingCartContext';
 
 const Cart = (props) => {
 
   const [ items, useItems ] = useState([]);
   const [ total, useTotal ] = useState(0);
+  const [shoppingCart, useShoppingCart, addToCart, adjustQty] = useContext(ShoppingCartContext);
 
   useEffect(() => {
-    const data = props.shoppingCart.map( async product => {
+    const data = shoppingCart.map( async product => {
       let item = await products.get(`api/products/${product.item}`)
       item = item.data.data.product;
       item.size = product.qty;
@@ -38,7 +40,7 @@ const Cart = (props) => {
       useTotal(newTotal)
     }
     // useItems([...items]);
-    props.adjustQty(item, change)
+    adjustQty(item, change)
   }
 
   if (items.length === 0) {

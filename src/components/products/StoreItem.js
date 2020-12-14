@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { ShoppingCartContext } from '../shoppingCartContext';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -21,8 +24,9 @@ const useStyles = makeStyles({
   }
 });
 
-const StoreItem = ({ product, addToCart }) => {
+const StoreItem = ({ product }) => {
   const { image, itemName, materials, description, price, prodId } = product;
+  const [shoppingCart, useShoppingCart, addToCart, adjustQty] = useContext(ShoppingCartContext)
   const classes = useStyles();
   return (
     <Card className={classes.margin} style={{display:"flex", justifyContent: "space-between", flexDirection: "column"}}>
