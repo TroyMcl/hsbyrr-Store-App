@@ -41,7 +41,7 @@ const ItemView = (props) => {
   })
 
   const classes = useStyles();
-  const { itemName, category, reviews, price, prodId, images } = product;
+  const { itemName, category, reviews, price, prodId, images, description, materials, recUsage } = product;
   const [shoppingCart, useShoppingCart, addToCart, adjustQty] = useContext(ShoppingCartContext)
   if (product.images === undefined) return <p>loading...</p>
   return (
@@ -80,14 +80,14 @@ const ItemView = (props) => {
       </Grid>
       <div>
         <Typography variant="h3">Overview</Typography>
-        {showOverview ? <ExpandMoreIcon onClick={() => setShowOverview(!showOverview)} /> : <ExpandLessIcon onClick={() => setShowOverview(!showOverview)} />}
+        {!showOverview ? <ExpandMoreIcon onClick={() => setShowOverview(!showOverview)} /> : <ExpandLessIcon onClick={() => setShowOverview(!showOverview)} />}
       </div>
-      {showOverview ? <Overview /> : ''}
+      {showOverview ? <Overview description={description} materials={materials} recUsage={recUsage}/> : ''}
       <div>
         <Typography variant="h3">Reviews</Typography>
-        {showReviews ? <ExpandMoreIcon onClick={() => setShowReviews(!showReviews)} /> : <ExpandLessIcon onClick={() => setShowReviews(!showReviews)} />}
+        {!showReviews ? <ExpandMoreIcon onClick={() => setShowReviews(!showReviews)} /> : <ExpandLessIcon onClick={() => setShowReviews(!showReviews)} />}
       </div>
-      {showReviews ? <Reviews /> : ''}
+      {showReviews ? <Reviews reviews={reviews} /> : ''}
     </div>
   )
 
