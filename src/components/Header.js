@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   appBar: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingLeft: '100px',
+    // paddingLeft: '100px',
     paddingRight: '100px',
   },
   search: {

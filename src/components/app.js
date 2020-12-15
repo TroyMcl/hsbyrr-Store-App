@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 import theme from '../theme';
 import StoreList from './products/StoreList';
 import Header from './Header';
-import ItemView from './products/ItemView';
+import ItemView from './products/ItemPage/ItemView';
 import Checkout from './checkout/Checkout';
 import Cart from './cart/Cart'
 import { ShoppingCartProvider } from './shoppingCartContext';
