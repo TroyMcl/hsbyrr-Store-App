@@ -20,9 +20,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Overview from './Overview';
 import Reviews from './Reviews';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
 const ItemView = (props) => {
   const [product, setProduct] = useState({});
+  const [showOverview, setShowOverview] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
 
   useEffect(() => {
     products.get(`api/products/${props.match.params.id}`)
@@ -77,14 +80,14 @@ const ItemView = (props) => {
       </Grid>
       <div>
         <Typography variant="h3">Overview</Typography>
-        <ExpandMoreIcon />
+        {showOverview ? <ExpandMoreIcon onClick={() => setShowOverview(!showOverview)} /> : <ExpandLessIcon onClick={() => setShowOverview(!showOverview)} />}
       </div>
-      <Overview />
+      {showOverview ? <Overview /> : ''}
       <div>
         <Typography variant="h3">Reviews</Typography>
-        <ExpandMoreIcon />
+        {showReviews ? <ExpandMoreIcon onClick={() => setShowReviews(!showReviews)} /> : <ExpandLessIcon onClick={() => setShowReviews(!showReviews)} />}
       </div>
-      <Reviews />
+      {showReviews ? <Reviews /> : ''}
     </div>
   )
 
