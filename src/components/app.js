@@ -23,8 +23,8 @@ const App = (props) => {
               <Header />
             </Grid>
             <Grid item container>
-              <Grid item xs={1} sm={2} />
-              <Grid item xs={12} sm={8}>
+              <Grid item xs={1} sm={1} />
+              <Grid item xs={12} sm={10}>
                 <Switch>
                   <Route
                     path="/"
@@ -50,7 +50,7 @@ const App = (props) => {
                   />
                 </Switch>
               </Grid>
-              <Grid item xs={1} sm={2} />
+              <Grid item xs={1} sm={1} />
             </Grid>
           </BrowserRouter>
         </Grid>
