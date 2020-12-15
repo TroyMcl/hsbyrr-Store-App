@@ -17,6 +17,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.7",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/styles": "^4.9.14",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
@@ -25,6 +26,7 @@
     "mongoose": "^5.9.13",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-responsive-carousel": "^3.2.11",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
@@ -32,7 +34,9 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "babel-loader": "^8.1.0",
+    "css-loader": "^5.0.1",
     "faker": "^5.1.0",
+    "style-loader": "^2.0.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.11"
   }
