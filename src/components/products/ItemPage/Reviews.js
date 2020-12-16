@@ -3,6 +3,7 @@ import reviewApi from '../../../apis/products';
 
 import { Grid, Typography, Button, LinearProgress, CircularProgress } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
+import Review from './Review';
 
 const Reviews = (props) => {
   const [reviewArr, setReviewArr] = useState([]);
@@ -43,7 +44,7 @@ const Reviews = (props) => {
       </Grid>
       <div>
         {reviewArr.map((review) => (
-          <p>{review.userName}</p>
+          <Review review={review} key={review.userName}/>
         ))}
       </div>
     </div>
