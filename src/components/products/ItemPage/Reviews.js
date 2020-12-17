@@ -44,6 +44,17 @@ const useStyles = makeStyles({
   bar: {
     height: 7,
     borderRadius: 5,
+  },
+  recommendFriend: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  recommendFriendText: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: '40px',
+    fontWeight: 'bold'
   }
 });
 
@@ -152,12 +163,34 @@ const Reviews = (props) => {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <div>
-            <CircularProgress variant="determinate" color='secondary' value={80} />
-            <Typography variant="caption" component="div">81%</Typography>
-          </div>
-            <Typography variant="body1"> would recommend to a friend</Typography>
+        <Grid item xs={12} sm={4} md={4} lg={4} className={classes.recommendFriend}>
+          <Box position="relative" display="inline-flex">
+            <CircularProgress
+              style={{borderRadius: '5px'}}
+              size={142}
+              thickness={2}
+              variant="static"
+              color='secondary'
+              value={81}
+            />
+            <Box
+              top={0}
+              left={0}
+              bottom={0}
+              right={0}
+              position="absolute"
+            >
+              <Typography
+                className={classes.recommendFriendText}
+                variant="caption"
+                component="div"
+              >
+                81%
+              </Typography>
+              <Typography style={{textAlign: 'center'}}variant="caption" component="div">would recommend</Typography>
+              <Typography style={{textAlign: 'center', lineHeight: '1em'}}variant="caption" component="div">to a friend</Typography>
+            </Box>
+          </Box>
         </Grid>
       </Grid>
       <div>
