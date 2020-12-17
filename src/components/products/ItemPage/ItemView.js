@@ -37,7 +37,23 @@ const ItemView = (props) => {
     mainImg: {
       height: '300px',
       margin: '15px'
-    }
+    },
+    reviews: {
+      marginTop: '10px',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    cartButton: {
+      width: '100%',
+      marginTop: '15px',
+      fontSize: 10,
+      backgroundColor: '#fadd5a',
+      '&:hover': {
+        backgroundColor: '#fae55a'
+      }
+    },
   })
 
   const classes = useStyles();
@@ -48,6 +64,39 @@ const ItemView = (props) => {
     <div>
       <Grid container alignItems="stretch" spacing={4}>
         <Grid item xs={12} sm={6} md={7} lg={7} >
+          <Typography >{`${category} - ${itemName}`}</Typography>
+          <div className={classes.reviews}>
+            <Rating name="product-rating" defaultValue={4.5} precision={0.5} size="small" readOnly />
+            <Typography>{`(4.8 Stars after ${reviews} reviews)`}</Typography>
+          </div>
+          <Carousel>
+            {images.map((url, i) => {
+              return (
+                <div key={i}>
+                  <img src={url} />
+                </div>
+              )
+            })}
+          </Carousel>
+        </Grid>
+        <Grid item xs={12} sm={6} md={5} lg={5} >
+          <Typography>{`$ ${price}.00`}</Typography>
+          <div>
+            <Typography><LocalShippingIcon /> {`Shipping Options`}</Typography>
+            <FormControlLabel control={<Checkbox name="fastShipping" />} label="1-2 Business Days $7.99" />
+            <FormControlLabel control={<Checkbox name="freeShipping" />} label="3-5 Business Days FREE" />
+          </div>
+          <div>
+            <Button
+              className={classes.cartButton}
+              onClick={(e) => addToCart(e, prodId)}
+              startIcon={<ShoppingCart style={{ fontSize: 'small' }} />}
+            >
+              Add to Cart
+            </Button>
+          </div>
+        </Grid>
+        {/* <Grid item xs={12} sm={6} md={7} lg={7} >
           <Typography >{`${category} - ${itemName}`}</Typography>
           <Rating name="product-rating" defaultValue={4.5} precision={0.5} size="small" readOnly />
           <Typography>{`4.8 Stars after ${reviews} reviews`}</Typography>
@@ -76,13 +125,13 @@ const ItemView = (props) => {
               )
             })}
           </Carousel>
-        </Grid>
+        </Grid> */}
       </Grid>
       <div>
         <Typography variant="h3">Overview</Typography>
         {!showOverview ? <ExpandMoreIcon onClick={() => setShowOverview(!showOverview)} /> : <ExpandLessIcon onClick={() => setShowOverview(!showOverview)} />}
       </div>
-      {showOverview ? <Overview description={description} materials={materials} recUsage={recUsage}/> : ''}
+      {showOverview ? <Overview description={description} materials={materials} recUsage={recUsage} /> : ''}
       <div>
         <Typography variant="h3">Reviews</Typography>
         {!showReviews ? <ExpandMoreIcon onClick={() => setShowReviews(!showReviews)} /> : <ExpandLessIcon onClick={() => setShowReviews(!showReviews)} />}
