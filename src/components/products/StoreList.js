@@ -12,14 +12,17 @@ import {
   Divider,
   makeStyles,
   Typography,
+  ListItemIcon,
+  ListItemText,
   FormControlLabel
 } from '@material-ui/core';
 
 
 
 const useStyles = makeStyles(theme => ({
-  sideBar: {
-
+  sideBarItem: {
+    padding: 5,
+    marginTop: 5,
   }
 }))
 
@@ -30,6 +33,7 @@ const StoreList = (props) => {
 
   const [page, setPage] = useState(1)
   const [contentSize, setContentSize] = useState(110);
+
   const [catagories, setCatagories] = useState([])
   const [selectedCatagory, setSelectedCatagory] = useState('Select a Category');
 
@@ -47,7 +51,7 @@ const StoreList = (props) => {
       .then(prod => {
         let holder = [];
         prod.forEach(element => {
-          if(holder.indexOf(element.category) === -1) {
+          if (holder.indexOf(element.category) === -1) {
             holder.push(element.category)
           }
         });
@@ -60,16 +64,16 @@ const StoreList = (props) => {
   }
 
   const changePage = (num) => {
-    setPaginateList(selectedProductList.slice((num-1) * 10, num * 10))
+    setPaginateList(selectedProductList.slice((num - 1) * 10, num * 10))
     setPage(num);
   }
 
-  const selectACatagory = (e) => {
-    let selected = e.target.name;
+  const selectACatagory = (value) => {
+    let selected = value;
 
     if (selected === selectedCatagory) {
       setPage(1);
-      setSelectedCatagory('');
+      setSelectedCatagory('Select a Category');
       setContentSize(productList.length);
       setSelectedProductList(productList);
       setPaginateList(productList.slice(0, 10));
@@ -85,7 +89,7 @@ const StoreList = (props) => {
     })
 
     setPage(1);
-    setSelectedCatagory(e.target.name);
+    setSelectedCatagory(value);
     setContentSize(holder.length);
     setSelectedProductList(holder);
     setPaginateList(holder.slice(0, 10));
@@ -95,30 +99,31 @@ const StoreList = (props) => {
   return (
     <Grid container alignItems="stretch" spacing={4}>
       <Grid item xs={12} sm={3} md={3} lg={3} className={classes.sideBar}>
-        {/* <Typography align="center" color="primary" variant="h6" >{selectedCatagory}</Typography> */}
         <Divider />
-          <List>
-            <Typography align="left">{selectedCatagory}</Typography>
-            {catagories.map((text, i) => {
-              if (!text) return
-              return (
-              <ListItem
-                      key={i}
-                      alignItems="flex-start"
-                      dense={true}
-                      button={true}
-                      onClick={selectACatagory}
-                      >
-                <FormControlLabel control={<Checkbox name={text} />} label={text} />
+        <List className={classes.sideBarItem}>
+          <Typography align="left" color="primary" >{selectedCatagory}</Typography>
+          {catagories.map((text, i) => {
+            if (!text) return
+            return (
+              <ListItem key={i} role={undefined} name={text} dense button onClick={() => selectACatagory(text)}>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    checked={text === selectedCatagory}
+                    tabIndex={-1}
+                  />
+                </ListItemIcon>
+                <ListItemText id={text} primary={text} />
               </ListItem>
             )
-            })}
-          </List>
+          })
+          }
+        </List>
       </Grid>
       <Grid item item xs={12} sm={9} md={9} lg={9} className={classes.main}>
         {paginateList.map(product => {
           return (
-            <StoreItem product={product} key={product.prodId}/>
+            <StoreItem product={product} key={product.prodId} />
           )
         })}
       </Grid>
