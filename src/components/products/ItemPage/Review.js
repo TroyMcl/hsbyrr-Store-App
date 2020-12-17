@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { Grid, Typography, Box } from '@material-ui/core';
+import {
+      Grid,
+      Typography,
+      Box,
+      makeStyles
+    } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { Check } from '@material-ui/icons';
@@ -38,37 +43,75 @@ function IconContainer(props) {
   return <span {...other}>{customRatingIcons[value].icon}</span>
 }
 
+const useStyles = makeStyles({
+  reviewContainer: {
+    padding: '5px',
+    marginTop: 15,
+    marginBottom: 15,
+    borderBottom: '1px solid #d3d3d3'
+  },
+  ratingSpecific: {
+    paddingTop: '7px',
+  },
+  ratingSpecificText: {
+    fontSize: 12,
+    fontWeight: 'lighter'
+  }
+})
+
 const Review = (props) => {
   const {userName, starRating, verifiedPurchaser, reviewDate, review, images, recommend, effictiveness, fastDelivery, quality } = props.review;
+
+  const classes = useStyles();
   return (
-    <Grid container>
+    <Grid container className={classes.reviewContainer}>
       <Grid item xs={12} sm={3} md={3} lg={3}>
-        <Typography>{userName}</Typography>
-        <Box>
-          <Typography component="legend">Effictiveness</Typography>
+        <Typography color="primary" > {userName}</Typography>
+        <Box className={classes.ratingSpecific}>
+          <Typography
+            className={classes.ratingSpecificText}
+            component="legend"
+          >Effictiveness
+        </Typography>
           <Rating
             name="effictivenessRating"
             defaultValue={effictiveness}
             getLabelText={(value) => customRatingIcons[value].label}
             IconContainerComponent={IconContainer}
+            readOnly
+            fontSize='small'
           />
         </Box>
         <Box>
-          <Typography component="legend">Fast Delivery</Typography>
+          <Typography
+            className={classes.ratingSpecificText}
+            component="legend"
+          >
+            Fast Delivery
+          </Typography>
           <Rating
             name="delivery"
             defaultValue={fastDelivery}
             getLabelText={(value) => customRatingIcons[value].label}
             IconContainerComponent={IconContainer}
+            readOnly
+            fontSize='small'
           />
         </Box>
         <Box>
-          <Typography component="legend">Quality</Typography>
+          <Typography
+            className={classes.ratingSpecificText}
+            component="legend"
+          >
+            Quality
+          </Typography>
           <Rating
             name="qualityRating"
             defaultValue={quality}
             getLabelText={(value) => customRatingIcons[value].label}
             IconContainerComponent={IconContainer}
+            readOnly
+            fontSize='small'
           />
         </Box>
       </Grid>
