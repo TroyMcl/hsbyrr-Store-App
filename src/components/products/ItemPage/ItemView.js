@@ -9,7 +9,11 @@ import {
   Typography,
   FormControlLabel,
   Checkbox,
-  Button
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/styles';
@@ -22,8 +26,40 @@ import Overview from './Overview';
 import Reviews from './Reviews';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
+const useStyles = makeStyles({
+  mainImg: {
+    height: '300px',
+    margin: '15px'
+  },
+  reviews: {
+    marginTop: '10px',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  cartButton: {
+    width: '100%',
+    marginTop: '15px',
+    fontSize: 10,
+    backgroundColor: '#fadd5a',
+    '&:hover': {
+      backgroundColor: '#fae55a'
+    }
+  },
+  shipping: {
+    marginTop: '15px',
+    marginBottom: '15px',
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderTop: '1px solid #D3D3D3',
+    borderBottom: '1px solid #D3D3D3'
+  }
+})
+
 const ItemView = (props) => {
   const [product, setProduct] = useState({});
+  const [selectedShipping, setSelectedShipping] = useState('');
   const [showOverview, setShowOverview] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
 
@@ -33,28 +69,14 @@ const ItemView = (props) => {
         setProduct(productInfo.data.data.product);
       })
   }, [])
-  const useStyles = makeStyles({
-    mainImg: {
-      height: '300px',
-      margin: '15px'
-    },
-    reviews: {
-      marginTop: '10px',
-      width: '100%',
-      display: 'flex',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-    },
-    cartButton: {
-      width: '100%',
-      marginTop: '15px',
-      fontSize: 10,
-      backgroundColor: '#fadd5a',
-      '&:hover': {
-        backgroundColor: '#fae55a'
-      }
-    },
-  })
+
+  const updateShipping = (value) => {
+    if (selectedShipping === value) {
+      setSelectedShipping('')
+    } else {
+      setSelectedShipping(value)
+    }
+  }
 
   const classes = useStyles();
   const { itemName, category, reviews, price, prodId, images, description, materials, recUsage } = product;
@@ -80,11 +102,31 @@ const ItemView = (props) => {
           </Carousel>
         </Grid>
         <Grid item xs={12} sm={6} md={5} lg={5} >
-          <Typography>{`$ ${price}.00`}</Typography>
-          <div>
-            <Typography><LocalShippingIcon /> {`Shipping Options`}</Typography>
-            <FormControlLabel control={<Checkbox name="fastShipping" />} label="1-2 Business Days $7.99" />
-            <FormControlLabel control={<Checkbox name="freeShipping" />} label="3-5 Business Days FREE" />
+          <Typography variant="h4" >{`$ ${price}.00`}</Typography>
+          <div className={classes.shipping}>
+            <Typography><LocalShippingIcon style={{verticalAlign: 'middle'}}/> {`Shipping Options`}</Typography>
+            <List className={classes.sideBarItem}>
+              <ListItem role={undefined} name={'fastShipping'} dense button onClick={() => updateShipping('fast')}>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    checked={'fast' === selectedShipping}
+                    tabIndex={-1}
+                  />
+                </ListItemIcon>
+                <ListItemText id={'fast'} primary={'1-2 Business Days $7.99'} />
+              </ListItem>
+              <ListItem role={undefined} name={'freeShipping'} dense button onClick={() => updateShipping('free')}>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    checked={'free' === selectedShipping}
+                    tabIndex={-1}
+                  />
+                </ListItemIcon>
+                <ListItemText id={'free'} primary={'3-5 Business Days FREE'} />
+              </ListItem>
+            </List>
           </div>
           <div>
             <Button
@@ -96,36 +138,6 @@ const ItemView = (props) => {
             </Button>
           </div>
         </Grid>
-        {/* <Grid item xs={12} sm={6} md={7} lg={7} >
-          <Typography >{`${category} - ${itemName}`}</Typography>
-          <Rating name="product-rating" defaultValue={4.5} precision={0.5} size="small" readOnly />
-          <Typography>{`4.8 Stars after ${reviews} reviews`}</Typography>
-        </Grid>
-        <Grid item xs={12} sm={6} md={5} lg={5} >
-          <Typography>{`$ ${price}.00`}</Typography>
-          <div>
-            <Typography><LocalShippingIcon /> {`Shipping Options`}</Typography>
-            <FormControlLabel control={<Checkbox name="fastShipping" />} label="1-2 Business Days $7.99" />
-            <FormControlLabel control={<Checkbox name="freeShipping" />} label="3-5 Business Days FREE" />
-          </div>
-          <div>
-            <Button className={classes.cartButton} onClick={(e) => addToCart(e, prodId)} >
-              <ShoppingCart />
-              <Typography>Add to Cart</Typography>
-            </Button>
-          </div>
-        </Grid>
-        <Grid item xs={12} sm={6} md={7} lg={7}>
-          <Carousel>
-            {images.map((url, i) => {
-              return (
-                <div key={i}>
-                  <img src={url} />
-                </div>
-              )
-            })}
-          </Carousel>
-        </Grid> */}
       </Grid>
       <div>
         <Typography variant="h3">Overview</Typography>
