@@ -14,15 +14,20 @@ import {
   Typography,
   ListItemIcon,
   ListItemText,
-  FormControlLabel
 } from '@material-ui/core';
 
 
 
 const useStyles = makeStyles(theme => ({
-  sideBarItem: {
-    padding: 5,
-    marginTop: 5,
+  sideBar: {
+    borderRight: '1px solid #D3D3D3',
+  },
+  paginateSection: {
+    width: '100%',
+    marginTop: 40,
+    marginBottom: 50,
+    display: 'flex',
+    justifyContent: 'center'
   }
 }))
 
@@ -59,10 +64,6 @@ const StoreList = (props) => {
       })
   }, []);
 
-  if (productList.length === 0) {
-    return <div>Loading</div>
-  }
-
   const changePage = (num) => {
     setPaginateList(selectedProductList.slice((num - 1) * 10, num * 10))
     setPage(num);
@@ -96,6 +97,10 @@ const StoreList = (props) => {
 
   }
 
+  if (productList.length === 0) {
+    return <div>Loading</div>
+  }
+
   return (
     <Grid container alignItems="stretch" spacing={4}>
       <Grid item xs={12} sm={3} md={3} lg={3} className={classes.sideBar}>
@@ -120,19 +125,21 @@ const StoreList = (props) => {
           }
         </List>
       </Grid>
-      <Grid item item xs={12} sm={9} md={9} lg={9} className={classes.main}>
+      <Grid item item xs={12} sm={9} md={9} lg={9}>
         {paginateList.map(product => {
           return (
             <StoreItem product={product} key={product.prodId} />
           )
         })}
       </Grid>
+      <div className={classes.paginateSection}>
       <Pagination
         totalSize={contentSize}
         currentPage={page}
         changeCurrentPage={changePage}
         numberOfPagesNextToActivePage={2}
       />
+      </div>
     </Grid>
   )
 
