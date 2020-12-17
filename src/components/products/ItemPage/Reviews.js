@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import reviewApi from '../../../apis/products';
+import Pagination from 'react-pagination-js';
+import "react-pagination-js/dist/styles.css";
 
 import {
         Grid,
@@ -60,21 +62,27 @@ const useStyles = makeStyles({
 
 const Reviews = (props) => {
   const [reviewArr, setReviewArr] = useState([]);
+  const [paginateList, setPaginateList] = useState([]);
+  const [page, setPage] = useState(1);
   const { reviews } = props;
   const classes = useStyles();
 
   useEffect(() => {
     (async () => {
       let data = await reviewApi.get(`reviews/${reviews}`)
-      console.log(data.data.data.reviews)
       let curr = data.data.data.reviews;
-      setReviewArr(curr.slice(0, 10))
+      setReviewArr(curr)
+      setPaginateList(curr.slice(0, 10))
     })()
   }, [])
 
-
+  const changePage = (num) => {
+    setPaginateList(reviewArr.slice((num - 1) * 10, num * 10))
+    setPage(num);
+  }
 
   if (reviewArr.length === 0) return <p>Loading...</p>
+
   return (
     <div>
       <Grid container className={classes.overviewContainer} >
@@ -194,10 +202,24 @@ const Reviews = (props) => {
         </Grid>
       </Grid>
       <div>
-        {reviewArr.map((review) => (
+        {paginateList.map((review) => (
           <Review review={review} key={review.userName}/>
         ))}
       </div>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        paddingTop="40px"
+        paddingBottom="50px"
+      >
+        <Pagination
+          totalSize={reviewArr.length}
+          currentPage={page}
+          changeCurrentPage={changePage}
+          numberOfPagesNextToActivePage={2}
+        />
+      </Box>
     </div>
   )
 }

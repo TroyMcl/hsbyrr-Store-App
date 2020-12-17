@@ -2,7 +2,7 @@ const { Review } = require('../db/index.js')
 
 exports.getNumberOfReviews = async (req, res) => {
   try {
-    let qty = req.params.num + 1;
+    let qty = 1 * req.params.num;
     let reviews = await Review.find()
     reviews = reviews.slice(0, qty);
     res.status(200).json({
