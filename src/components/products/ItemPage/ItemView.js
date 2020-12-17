@@ -54,6 +54,22 @@ const useStyles = makeStyles({
     paddingBottom: 10,
     borderTop: '1px solid #D3D3D3',
     borderBottom: '1px solid #D3D3D3'
+  },
+  expandableSections: {
+    marginTop: 15,
+    marginBottom: 15,
+    borderRadius: 5,
+    padding: 10,
+    backgroundColor: '#e6e6e6',
+    display: 'flex',
+    justifyContent: "space-between",
+    alignItems: 'center',
+  },
+  expandableText: {
+    fontSize: 18,
+  },
+  expandableIcon: {
+    fontSize: 18
   }
 })
 
@@ -88,7 +104,13 @@ const ItemView = (props) => {
         <Grid item xs={12} sm={6} md={7} lg={7} >
           <Typography >{`${category} - ${itemName}`}</Typography>
           <div className={classes.reviews}>
-            <Rating name="product-rating" defaultValue={4.5} precision={0.5} size="small" readOnly />
+            <Rating
+              name="product-rating"
+              defaultValue={4.5}
+              precision={0.5}
+              size="small"
+              readOnly
+            />
             <Typography>{`(4.8 Stars after ${reviews} reviews)`}</Typography>
           </div>
           <Carousel>
@@ -104,9 +126,14 @@ const ItemView = (props) => {
         <Grid item xs={12} sm={6} md={5} lg={5} >
           <Typography variant="h4" >{`$ ${price}.00`}</Typography>
           <div className={classes.shipping}>
-            <Typography><LocalShippingIcon style={{verticalAlign: 'middle'}}/> {`Shipping Options`}</Typography>
+            <Typography><LocalShippingIcon style={{ verticalAlign: 'middle' }} /> {`Shipping Options`}</Typography>
             <List className={classes.sideBarItem}>
-              <ListItem role={undefined} name={'fastShipping'} dense button onClick={() => updateShipping('fast')}>
+              <ListItem
+                role={undefined}
+                name={'fastShipping'}
+                dense
+                button onClick={() => updateShipping('fast')}
+              >
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
@@ -116,7 +143,12 @@ const ItemView = (props) => {
                 </ListItemIcon>
                 <ListItemText id={'fast'} primary={'1-2 Business Days $7.99'} />
               </ListItem>
-              <ListItem role={undefined} name={'freeShipping'} dense button onClick={() => updateShipping('free')}>
+              <ListItem
+                role={undefined}
+                name={'freeShipping'}
+                dense
+                button onClick={() => updateShipping('free')}
+              >
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
@@ -139,14 +171,30 @@ const ItemView = (props) => {
           </div>
         </Grid>
       </Grid>
-      <div>
-        <Typography variant="h3">Overview</Typography>
-        {!showOverview ? <ExpandMoreIcon onClick={() => setShowOverview(!showOverview)} /> : <ExpandLessIcon onClick={() => setShowOverview(!showOverview)} />}
+      <div className={classes.expandableSections} onClick={() => setShowOverview(!showOverview)} >
+        <Typography
+          variant="h2"
+          className={classes.expandableText}
+        >
+          Overview
+        </Typography>
+        {!showOverview ?
+          <ExpandMoreIcon className={classes.expandableIcon} /> :
+          <ExpandLessIcon className={classes.expandableIcon} />
+        }
       </div>
       {showOverview ? <Overview description={description} materials={materials} recUsage={recUsage} /> : ''}
-      <div>
-        <Typography variant="h3">Reviews</Typography>
-        {!showReviews ? <ExpandMoreIcon onClick={() => setShowReviews(!showReviews)} /> : <ExpandLessIcon onClick={() => setShowReviews(!showReviews)} />}
+      <div className={classes.expandableSections} onClick={() => setShowReviews(!showReviews)} >
+        <Typography
+          variant="h2"
+          className={classes.expandableText}
+        >
+          Reviews
+        </Typography>
+        {!showReviews ?
+          <ExpandMoreIcon className={classes.expandableIcon} /> :
+          <ExpandLessIcon className={classes.expandableIcon} />
+        }
       </div>
       {showReviews ? <Reviews reviews={reviews} /> : ''}
     </div>
