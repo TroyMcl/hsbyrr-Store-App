@@ -48,6 +48,7 @@ const useStyles = makeStyles({
     padding: '5px',
     marginTop: 15,
     marginBottom: 15,
+    paddingBottom: 15,
     borderBottom: '1px solid #d3d3d3'
   },
   ratingSpecific: {
@@ -59,8 +60,14 @@ const useStyles = makeStyles({
   }
 })
 
+
 const Review = (props) => {
   const {userName, starRating, verifiedPurchaser, reviewDate, review, images, recommend, effictiveness, fastDelivery, quality } = props.review;
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric'}
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
 
   const classes = useStyles();
   return (
@@ -116,14 +123,53 @@ const Review = (props) => {
         </Box>
       </Grid>
       <Grid item xs={12} sm={9} md={9} lg={9}>
-      <Rating name="totalRating" value={starRating} readOnly />
-      <Typography>Generic HeadLine: Fix data Troy</Typography>
-      {verifiedPurchaser?  <Typography variant="body2"> <Check /> Verified Purchaser</Typography> : ''}
-      <Typography>
-        | Review added on {reviewDate}
-      </Typography>
+        <Box
+          display="flex"
+          justifyContent="flex-start"
+          alignItems="center"
+          style={{marginBottom: '7px'}}
+        >
+          <Rating name="totalRating" value={starRating} readOnly />
+          <Typography style={{paddingLeft: '10px', fontSize: '14'}}>Generic HeadLine: Fix data Troy</Typography>
+        </Box>
+      <Box
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="center"
+        style={{marginBottom: '7px'}}
+      >
+        {verifiedPurchaser ?
+          <Box
+          display="flex"
+          alignItems="center"
+          >
+            <Check
+              color="primary"
+              style={{paddingRight: '5px'}}
+
+            />
+            <Typography variant="body2">
+              Verified Purchaser |
+            </Typography>
+          </Box>:
+          ''
+        }
+        <Typography style={{fontSize: '10px', fontWeight: 'lighter', paddingLeft: '5px'}} >
+          Posted on {formatDate(reviewDate)}
+        </Typography>
+      </Box>
       <Typography>{review}</Typography>
-      {recommend ? <Typography>{<CheckCircleIcon color='primary' />} I would recommend this to a Friend</Typography> : ''}
+      {recommend ?
+        <Box
+        display="flex"
+        alignItems="center"
+        marginTop='10px'
+        >
+          <CheckCircleIcon color='primary' />
+          <Typography style={{fontWeight: 'lighter', paddingLeft: '8px'}}>I would recommend this to a Friend</Typography>
+        </Box>:
+        ''
+      }
       </Grid>
     </Grid>
   )
