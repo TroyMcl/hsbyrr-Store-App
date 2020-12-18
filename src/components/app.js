@@ -7,10 +7,11 @@ import { Grid } from '@material-ui/core';
 import theme from '../theme';
 import StoreList from './products/StoreList';
 import Header from './Header';
-import ItemView from './products/ItemPage/ItemView';
+import ItemView from './products/ItemPage/ItemView.js';
 import Checkout from './checkout/Checkout';
 import Cart from './cart/Cart'
 import { ShoppingCartProvider } from './shoppingCartContext';
+
 
 const App = (props) => {
 
@@ -39,13 +40,11 @@ const App = (props) => {
                   <Route
                     path="/cart"
                     exact
-                    // render={(props) => <Cart {...props} shoppingCart={shoppingCart} adjustQty={adjustQty}/>}
                     render={(props) => <Cart {...props} />}
                   />
                   <Route
                     path="/checkout"
                     exact
-                    // render={(props) => <Checkout {...props} shoppingCart={shoppingCart}/>}
                     render={(props) => <Checkout {...props} />}
                   />
                 </Switch>
