@@ -28,6 +28,10 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 50,
     display: 'flex',
     justifyContent: 'center'
+  },
+  listItemOverride: {
+    paddingTop: '0px',
+    paddingBottom: '0px'
   }
 }))
 
@@ -105,14 +109,22 @@ const StoreList = (props) => {
     <Grid container alignItems="stretch" spacing={4}>
       <Grid item xs={12} sm={3} md={3} lg={3} className={classes.sideBar}>
         <Divider />
-        <List className={classes.sideBarItem}>
+        <List disablePadding={true} dense>
           <Typography align="left" color="primary" >{selectedCatagory}</Typography>
           {catagories.map((text, i) => {
             if (!text) return
             return (
-              <ListItem key={i} role={undefined} name={text} dense button onClick={() => selectACatagory(text)}>
+              <ListItem
+                className={classes.listItemOverride}
+                key={i}
+                name={text}
+                dense
+                button
+                onClick={() => selectACatagory(text)}
+              >
                 <ListItemIcon>
                   <Checkbox
+                    size="small"
                     edge="start"
                     checked={text === selectedCatagory}
                     tabIndex={-1}
