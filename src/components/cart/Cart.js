@@ -2,7 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import products from '../../apis/products';
 import CheckOutItem from './CheckOutItem';
-import Button from '@material-ui/core/Button';
+import  { Button,
+          Box,
+          Typography
+        } from '@material-ui/core';
 import { ShoppingCartContext } from '../shoppingCartContext';
 
 const Cart = (props) => {
@@ -54,8 +57,28 @@ const Cart = (props) => {
           <CheckOutItem product={item} key={item.prodId} updateQty={updateQty}/>
         )
       })}
-       <Link to={`/checkout`}>{<Button variant="contained" color="secondary" >Checkout</Button>}</Link>
-    <p>$ {total}.00</p>
+      <Box
+        display="flex"
+        justifyContent="flex-end"
+      >
+        <Typography
+          style={{ paddingLeft: '5px', fontWeight: 'lighter', paddingRight: '5px' }}
+        >
+          TOTAL:
+        </Typography>
+        <Typography
+          style={{fontWeight: 'bold', fontSize: '14'}}
+        >
+          $ {total}.00
+        </Typography>
+      </Box>
+      <Box
+      display="flex"
+      justifyContent="flex-end"
+      style={{marginTop: '15px'}}
+      >
+        <Link style={{textDecoration: 'none'}} to={`/checkout`}>{<Button variant="contained" color="secondary" >Checkout</Button>}</Link>
+      </Box>
     </div>
   )
 
