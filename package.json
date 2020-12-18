@@ -26,6 +26,7 @@
     "mongoose": "^5.9.13",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-pagination-js": "^2.0.0",
     "react-responsive-carousel": "^3.2.11",
     "react-router-dom": "^5.1.2"
   },
