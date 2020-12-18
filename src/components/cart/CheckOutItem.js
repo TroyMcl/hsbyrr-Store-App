@@ -1,65 +1,130 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { Grid } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import {
+  Grid,
+  Typography,
+  IconButton,
+  Box
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-const CheckOutItem = (props) => {
-  const { itemName, image, price, prodId, size } = props.product;
-  const itemTotal = price * size;
+const useStyles = makeStyles({
+  container: {
+    marginTop: '15px',
+    marginBottom: '15px',
+    paddingBottom: '15px',
+    borderBottom: '1px solid #d3d3d3'
+  },
+  link: {
+    textDecoration: 'none',
+  },
+  quantyField: {
+    padding: '2px 6px 2px 6px',
+    fontSize: '14',
+    lineHeight: 1.1,
+    fontWeight: 'bold'
+  },
+  quantyBtn: {
+    margin: '5px'
+  },
+})
 
-  const useStyles = makeStyles({
-    root: {
-      width: '4ch',
-      textAlign: 'center',
-    }
-  })
+const CheckOutItem = (props) => {
+  console.log(props.product)
+  const { itemName, images, price, prodId, size, reviews, category } = props.product;
+  const itemTotal = price * size;
   const classes = useStyles();
 
+  const selectImage = () => {
+    return images[Math.floor(Math.random() * images.length)]
+  }
+  const selectedImage = selectImage();
+  console.log('here', selectedImage)
   return (
-    <Card>
-      <Grid container spacing={2}>
-        <Grid item sm={12} s={12} md={3} lg={3}>
-          <img
-            alt={itemName}
-            height="170"
-            width="130"
-            src={image[0]}
-          />
-        </Grid>
-        <Grid item sm={12} s={12} md={4} lg={4}>
-          <Typography gutterBottom>{itemName}</Typography>
-          <Typography color="textSecondary" gutterBottom>{`$ ${price}.00`}</Typography>
-          {/* <Link to={`/product/${prodId}`}>{<Button size="small">Info</Button>}</Link> */}
-          <Link style={{textDecoration: 'none'}} to={`/product/${prodId}`}>Info</Link>
-        </Grid>
-        <Grid item sm={12} s={12} md={5} lg={5}>
-          <CardContent>
-            <Typography gutterBottom >
-              Num of Items
-              <IconButton onClick={() => props.updateQty(prodId, 1)}><AddIcon /></IconButton>
-              <TextField
-                className={classes.root}
-                value={size}
-                variant="filled"
-                size="small"
-                InputProps={{readOnly: true}}
-              />
-              <IconButton onClick={() => props.updateQty(prodId, -1)} ><RemoveIcon/></IconButton>
-            </Typography>
-              Item Price $ {itemTotal}.00
-          </CardContent>
-        </Grid>
+    <Grid
+      container
+      spacing={4}
+      className={classes.container}
+    >
+      <Grid item sm={12} s={3} md={3} lg={3}>
+        <img
+          alt={itemName}
+          width="100%"
+          src={selectedImage}
+        />
       </Grid>
-    </Card>
+      <Grid item sm={12} s={5} md={5} lg={5}>
+        <Link className={classes.link} to={`/product/${prodId}`}>
+          <Typography
+            gutterBottom
+            variant="subtitle2"
+            color="primary"
+            style={{ fontWeight: 'lighter' }}
+          >
+            {category ? category : 'Home'} - {itemName}
+          </Typography>
+        </Link>
+        <Box
+          display="flex"
+          alignItems="center"
+        >
+          <Rating name="product-rating" defaultValue={3.5} precision={0.5} size="small" readOnly />
+          <Typography
+            style={{ paddingLeft: '5px', fontSize: '10px', fontWeight: 'lighter' }}
+          >
+            {`(${reviews} ratings)`}
+          </Typography>
+        </Box>
+        <Box
+          style={{ marginTop: '7px' }}
+          display="flex"
+          alignItems="center"
+        >
+          <Typography
+            color="textSecondary"
+            gutterBottom
+          >
+            Qty:
+          </Typography>
+          <IconButton
+            className={classes.quantyBtn}
+            onClick={() => props.updateQty(prodId, 1)}
+          >
+            <AddIcon />
+          </IconButton>
+          <Typography className={classes.quantyField}>{size}</Typography>
+          <IconButton
+            className={classes.quantyBtn}
+            onClick={() => props.updateQty(prodId, -1)}
+          >
+            <RemoveIcon />
+          </IconButton>
+        </Box>
+      </Grid>
+      <Grid item sm={12} s={12} md={4} lg={4}
+        container
+        direction='column'
+        justify="space-between"
+        alignItems="flex-end"
+      >
+          <Typography style={{ paddingRight: '5px', fontWeight: 'bold'}}>Price: $ {price}.00</Typography>
+          <Box
+            display="flex"
+          >
+            <Typography
+              style={{ paddingLeft: '5px', fontWeight: 'lighter' }}
+            >
+              {size === 1 ? `Subtotal (${size} item):` : `Subtotal (${size} items):` }
+            </Typography>
+            <Typography className={classes.quantyField}>$ {itemTotal}.00</Typography>
+          </Box>
+
+      </Grid>
+    </Grid>
   )
 };
 
