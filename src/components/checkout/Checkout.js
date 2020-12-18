@@ -1,4 +1,5 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useState, useEffect, useContext } from 'react';
+import { ShoppingCartContext } from '../shoppingCartContext';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -13,19 +14,6 @@ import Review from './Review';
 
 import products from '../../apis/products';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://healthscentsbyrr.com/">
-        Health Scents by RR
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   layout: {
     width: 'auto',
@@ -39,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(5),
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
@@ -64,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 const Checkout = (props) => {
   const classes = useStyles();
   const steps = ['Shipping address', 'Payment details', 'Review your order'];
+  const [shoppingCart, useShoppingCart, addToCart, adjustQty] = useContext(ShoppingCartContext);
 
   const [ items, setItems ] = useState([]);
   const [ activeStep, setActiveStep ] = useState(0);
@@ -84,7 +73,7 @@ const Checkout = (props) => {
     })
 
   useEffect(() => {
-    const data = props.shoppingCart.map( async product => {
+    const data = shoppingCart.map( async product => {
       let item = await products.get(`api/products/${product.item}`)
       item = item.data.data.product;
       item.size = product.qty;
@@ -127,6 +116,11 @@ const Checkout = (props) => {
     setActiveStep(activeStep - 1);
   };
 
+  const handleSubmit = () => {
+    setActiveStep(activeStep + 1);
+    useShoppingCart([])
+  }
+
   return (
     <div>
       <main className={classes.layout}>
@@ -136,7 +130,7 @@ const Checkout = (props) => {
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
-              <Step key={label}>
+              <Step key={label} color="secondary">
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
@@ -161,20 +155,29 @@ const Checkout = (props) => {
                       Back
                     </Button>
                   )}
+                  {activeStep === steps.length -1 ?
+                    <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleSubmit}
+                    className={classes.button}
+                  >
+                    Place order
+                  </Button> :
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    Next
                   </Button>
+                  }
                 </div>
               </>
             )}
           </>
         </Paper>
-        <Copyright />
       </main>
     </div>
   );

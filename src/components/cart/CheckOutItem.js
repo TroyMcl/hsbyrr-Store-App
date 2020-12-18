@@ -34,7 +34,6 @@ const useStyles = makeStyles({
 })
 
 const CheckOutItem = (props) => {
-  console.log(props.product)
   const { itemName, images, price, prodId, size, reviews, category } = props.product;
   const itemTotal = price * size;
   const classes = useStyles();

@@ -6,7 +6,6 @@ export const ShoppingCartProvider = props => {
   const [ shoppingCart, useShoppingCart ] = useState([]);
 
   const addToCart = (e, item) => {
-    console.log(e, item);
     const index = shoppingCart.findIndex((itemObj => itemObj.item === item));
     if (index === -1) {
       const updatedShoppingCart = [...shoppingCart, {item, qty: 1}];

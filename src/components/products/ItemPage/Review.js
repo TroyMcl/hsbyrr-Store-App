@@ -144,7 +144,7 @@ const Review = (props) => {
           alignItems="center"
           >
             <Check
-              color="primary"
+              color="secondary"
               style={{paddingRight: '5px'}}
 
             />
@@ -165,7 +165,7 @@ const Review = (props) => {
         alignItems="center"
         marginTop='10px'
         >
-          <CheckCircleIcon color='primary' />
+          <CheckCircleIcon color='secondary' />
           <Typography style={{fontWeight: 'lighter', paddingLeft: '8px'}}>I would recommend this to a Friend</Typography>
         </Box>:
         ''

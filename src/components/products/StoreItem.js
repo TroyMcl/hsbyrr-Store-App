@@ -25,10 +25,14 @@ const useStyles = makeStyles({
     width: '100%',
     marginTop: '15px',
     fontSize: 10,
-    backgroundColor: '#fadd5a',
+    backgroundColor: '#9f496e',
     '&:hover': {
-      backgroundColor: '#fae55a'
+      backgroundColor: '#b8547f'
     }
+    // backgroundColor: '#fadd5a',
+    // '&:hover': {
+    //   backgroundColor: '#fae55a'
+    // }
   },
   reviews: {
     marginTop: '10px',
@@ -71,7 +75,7 @@ const StoreItem = ({ product }) => {
       </Grid>
       <Grid item xs={12} sm={5} md={5} lg={5}>
         <Link className={classes.link} to={`/product/${prodId}`}>
-          <Typography variant="subtitle2" color="secondary" style={{ fontWeight: 'lighter' }}>
+          <Typography variant="subtitle2" style={{color: 'black'}} >
             {category ? category : 'Home'} - {itemName}
           </Typography>
         </Link>
@@ -86,6 +90,7 @@ const StoreItem = ({ product }) => {
           $ {price}.00
           {onSale ? <Typography variant="h3" color="secondary" style={{ fontWeight: 'lighter' }} >On Sale! </Typography> : ''}
           <Button
+            style={{color: 'white'}}
             className={classes.cartButton}
             onClick={(e) => addToCart(e, prodId)}
             startIcon={<ShoppingCart style={{ fontSize: 'small' }} />}

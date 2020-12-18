@@ -107,7 +107,7 @@ const Reviews = (props) => {
           </Typography>
           <Button
             className={classes.reviewBtn}
-            color="primary"
+            color="secondary"
             variant="contained"
             size='small'
           >
@@ -121,7 +121,7 @@ const Reviews = (props) => {
               <LinearProgress
                 className={classes.bar}
                 variant="determinate"
-                color='primary'
+                color='secondary'
                 value={70}
               />
             </Box>
@@ -132,7 +132,7 @@ const Reviews = (props) => {
               <LinearProgress
                 className={classes.bar}
                 variant="determinate"
-                color='primary'
+                color='secondary'
                 value={20}
               />
             </Box>
@@ -143,7 +143,7 @@ const Reviews = (props) => {
               <LinearProgress
                 className={classes.bar}
                 variant="determinate"
-                color='primary'
+                color='secondary'
                 value={10}
               />
             </Box>
@@ -154,7 +154,7 @@ const Reviews = (props) => {
               <LinearProgress
                 className={classes.bar}
                 variant="determinate"
-                color='primary'
+                color='secondary'
                 value={5}
               />
             </Box>
@@ -165,7 +165,7 @@ const Reviews = (props) => {
               <LinearProgress
                 className={classes.bar}
                 variant="determinate"
-                color='primary'
+                color='secondary'
                 value={30}
               />
             </Box>

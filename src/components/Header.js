@@ -66,7 +66,7 @@ const Header = () => {
   const [shoppingCart, useShoppingCart, addToCart, adjustQty] = useContext(ShoppingCartContext);
   const classes = useStyles();
   return (
-    <AppBar position="static" style={{ marginBottom: '20px', background: 'linear-gradient(to right bottom, #9c27b0, #d05ce3)' }}>
+    <AppBar position="static" style={{ marginBottom: '20px', background: 'linear-gradient(to right bottom, #647295, #67769c)' }}>
       <Toolbar>
         <Grid container>
           <Grid item xs={1} sm={1} md={1} />

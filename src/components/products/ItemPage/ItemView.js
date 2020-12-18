@@ -39,12 +39,13 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   cartButton: {
+    color: 'white',
     width: '100%',
     marginTop: '15px',
     fontSize: 10,
-    backgroundColor: '#fadd5a',
+    backgroundColor: '#9f496e',
     '&:hover': {
-      backgroundColor: '#fae55a'
+      backgroundColor: '#b8547f'
     }
   },
   shipping: {
@@ -58,9 +59,19 @@ const useStyles = makeStyles({
   expandableSections: {
     marginTop: 15,
     marginBottom: 15,
+    padding: 10,
+    display: 'flex',
+    justifyContent: "space-between",
+    alignItems: 'center',
+    borderBottom: '1px solid #d3d3d3'
+  },
+  expandedSections: {
+    marginTop: 15,
+    marginBottom: 15,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: '#e6e6e6',
+    color: 'white',
+    backgroundColor: '#647295',
     display: 'flex',
     justifyContent: "space-between",
     alignItems: 'center',
@@ -171,31 +182,47 @@ const ItemView = (props) => {
           </div>
         </Grid>
       </Grid>
-      <div className={classes.expandableSections} onClick={() => setShowOverview(!showOverview)} >
-        <Typography
-          variant="h2"
-          className={classes.expandableText}
-        >
-          Overview
-        </Typography>
-        {!showOverview ?
-          <ExpandMoreIcon className={classes.expandableIcon} /> :
+      {!showOverview ?
+        <div className={classes.expandableSections} onClick={() => setShowOverview(!showOverview)} >
+          <Typography
+            variant="h2"
+            className={classes.expandableText}
+          >
+            Overview
+          </Typography>
+          <ExpandMoreIcon className={classes.expandableIcon} />
+        </div> :
+        <div className={classes.expandedSections} onClick={() => setShowOverview(!showOverview)} >
+          <Typography
+            variant="h2"
+            className={classes.expandableText}
+          >
+            Overview
+          </Typography>
           <ExpandLessIcon className={classes.expandableIcon} />
-        }
-      </div>
+        </div>
+      }
       {showOverview ? <Overview description={description} materials={materials} recUsage={recUsage} /> : ''}
-      <div className={classes.expandableSections} onClick={() => setShowReviews(!showReviews)} >
-        <Typography
-          variant="h2"
-          className={classes.expandableText}
-        >
-          Reviews
-        </Typography>
-        {!showReviews ?
-          <ExpandMoreIcon className={classes.expandableIcon} /> :
+      {!showReviews ?
+        <div className={classes.expandableSections} onClick={() => setShowReviews(!showReviews)} >
+          <Typography
+            variant="h2"
+            className={classes.expandableText}
+          >
+            Reviews
+          </Typography>
+          <ExpandMoreIcon className={classes.expandableIcon} />
+        </div> :
+        <div className={classes.expandedSections} onClick={() => setShowReviews(!showReviews)} >
+          <Typography
+            variant="h2"
+            className={classes.expandableText}
+          >
+            Reviews
+          </Typography>
           <ExpandLessIcon className={classes.expandableIcon} />
-        }
-      </div>
+        </div>
+      }
       {showReviews ? <Reviews reviews={reviews} /> : ''}
     </div>
   )
