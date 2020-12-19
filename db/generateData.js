@@ -36,7 +36,9 @@ const generateData = () => {
     let imageArray = urlStrings(randomNum(11));
     let categorySelected = categories[randomNum(10)];
     let numReviews = randomNum(300);
+    let primaryImg = imageArray[randomNum(imageArray.length-1)]
     let product = {
+      primaryImg: primaryImg,
       images: imageArray,
       itemName: faker.commerce.productName(),
       price: faker.commerce.price(),
@@ -44,11 +46,12 @@ const generateData = () => {
       qty: 0,
       prodId: faker.random.uuid(),
       freeShipping: faker.random.boolean(),
-      category: categorySelected, //list I make of 10
+      category: categorySelected,
       description: faker.lorem.paragraphs(),
       materials: faker.lorem.paragraph(),
       recUsage: faker.lorem.paragraphs(),
-      reviews: numReviews
+      onSale: faker.random.boolean(),
+      reviews: numReviews,
     }
     data.push(product)
   }
@@ -72,6 +75,7 @@ const generateReviews = () => {
     let review = {
       userName: faker.internet.userName(),
       starRating: randomNum(5),
+      headline: faker.lorem.sentence(),
       verifiedPurchaser: faker.random.boolean(),
       reviewDate: faker.date.recent(),
       review: faker.lorem.paragraphs(),
