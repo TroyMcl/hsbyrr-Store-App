@@ -72,7 +72,7 @@ const StoreItem = ({ product }) => {
       <Grid item xs={12} sm={5} md={5} lg={5}>
         <Link className={classes.link} to={`/product/${prodId}`}>
           <Typography variant="subtitle2" style={{color: 'black'}} >
-            {category ? category : 'Home'} - {itemName}
+            {category ? category : 'Health'} - {itemName}
           </Typography>
         </Link>
         <div className={classes.reviews}>

@@ -113,7 +113,7 @@ const ItemView = (props) => {
     <div>
       <Grid container alignItems="stretch" spacing={4}>
         <Grid item xs={12} sm={6} md={7} lg={7} >
-          <Typography >{`${category} - ${itemName}`}</Typography>
+          <Typography >{!category ? `Health - ${itemName}` : `${category} - ${itemName}`}</Typography>
           <div className={classes.reviews}>
             <Rating
               name="product-rating"
