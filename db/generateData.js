@@ -37,6 +37,9 @@ const generateData = () => {
     let categorySelected = categories[randomNum(10)];
     let numReviews = randomNum(300);
     let primaryImg = imageArray[randomNum(imageArray.length-1)]
+    if (!primaryImg) {
+      primaryImg = imageArray[0]
+    }
     let product = {
       primaryImg: primaryImg,
       images: imageArray,
@@ -55,13 +58,14 @@ const generateData = () => {
     }
     data.push(product)
   }
+  console.log(data[1])
   Product.insertMany(data)
   .then(res => {
     console.log("Products added to database")
     return
   })
   .catch(err => {
-    console.log('error writing to db ', err)
+    console.log('error writing to db')
   })
 
 }
@@ -96,4 +100,4 @@ const generateReviews = () => {
     console.log('error adding reviews ',err)
   })
 }
-generateReviews();
+// generateReviews();

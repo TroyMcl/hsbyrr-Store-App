@@ -14,10 +14,12 @@ mongoose
 
 const ProductSchema = new mongoose.Schema({
   images: [ String ],
+  primaryImg: String,
   itemName: String,
   price: Number,
   inStock: Boolean,
-  qty: 0,
+  onSale: Boolean,
+  qty: Number,
   prodId: String,
   freeShipping: Boolean,
   category: String, //list I make of 10
@@ -39,7 +41,8 @@ const ReviewSchema = new mongoose.Schema({
   recommend: Boolean,
   effictiveness: Number,
   fastDelivery: Number,
-  quality: Number
+  quality: Number,
+  headline: String
 })
 
 exports.Review = mongoose.model('Review', ReviewSchema);
