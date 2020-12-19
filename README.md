@@ -17,8 +17,6 @@ I chose to use Mongo Atlas to host the database for 2 reasons. First, using Atla
 
 The Front end was created with React, and React Router. React Hooks were used instead of class components to make future scaling easier, and to make it easer to reuse logic as the app grows. UI was designed with material-UI for theming convenience and built in responsive functionality.
 
-> This is currently a work in progress, as authentication needs to be added to the server routes, and styling needs to be finished
-
 ### Currently working on:
 
 Authentication
@@ -28,8 +26,6 @@ Authentication
 * Build login and out pages for front end
 * Build admin page to make changes to products and orders
 
-Styling
-* Finish styling of Front End components
 
 ## Technologies
 * Javascript
