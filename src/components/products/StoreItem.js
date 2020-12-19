@@ -54,20 +54,16 @@ const useStyles = makeStyles({
 
 
 const StoreItem = ({ product }) => {
-  const { images, itemName, onSale, price, prodId, freeShipping, category, reviews } = product;
+  const { primaryImg, itemName, onSale, price, prodId, freeShipping, category, reviews } = product;
   const [shoppingCart, useShoppingCart, addToCart, adjustQty] = useContext(ShoppingCartContext)
   const classes = useStyles();
-  let randomImage = images[Math.floor((Math.random() * images.length) + 1)];
-  if (!randomImage) {
-    randomImage = images[0]
-  }
 
   return (
     <Grid container spacing={4} className={classes.itemView}>
       <Grid item xs={12} sm={3} md={3} lg={3}>
         <Link to={`/product/${prodId}`} className={classes.link}>{
           <img
-            src={randomImage}
+            src={primaryImg}
             width='100%'
             alt={itemName}
           ></img>
@@ -88,7 +84,8 @@ const StoreItem = ({ product }) => {
       <Grid item xs={12} sm={4} md={4} lg={4}>
         <Typography variant="h6">
           $ {price}.00
-          {onSale ? <Typography variant="h3" color="secondary" style={{ fontWeight: 'lighter' }} >On Sale! </Typography> : ''}
+        </Typography>
+          {onSale ? <Typography variant="h6" color="secondary" style={{ fontWeight: 'lighter' }} >On Sale! </Typography> : ''}
           <Button
             style={{color: 'white'}}
             className={classes.cartButton}
@@ -97,7 +94,7 @@ const StoreItem = ({ product }) => {
           >
             Add to Cart
             </Button>
-        </Typography>
+
       </Grid>
     </Grid>
   );

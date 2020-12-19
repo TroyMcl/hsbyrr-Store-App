@@ -34,15 +34,10 @@ const useStyles = makeStyles({
 })
 
 const CheckOutItem = (props) => {
-  const { itemName, images, price, prodId, size, reviews, category } = props.product;
+  const { itemName, primaryImg, images, price, prodId, size, reviews, category } = props.product;
   const itemTotal = price * size;
   const classes = useStyles();
 
-  const selectImage = () => {
-    return images[Math.floor(Math.random() * images.length)]
-  }
-  const selectedImage = selectImage();
-  console.log('here', selectedImage)
   return (
     <Grid
       container
@@ -53,7 +48,7 @@ const CheckOutItem = (props) => {
         <img
           alt={itemName}
           width="100%"
-          src={selectedImage}
+          src={primaryImg}
         />
       </Grid>
       <Grid item sm={12} s={5} md={5} lg={5}>

@@ -62,7 +62,7 @@ const useStyles = makeStyles({
 
 
 const Review = (props) => {
-  const {userName, starRating, verifiedPurchaser, reviewDate, review, images, recommend, effictiveness, fastDelivery, quality } = props.review;
+  const {userName, starRating, verifiedPurchaser, reviewDate, review, headline, recommend, effictiveness, fastDelivery, quality } = props.review;
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric'}
@@ -130,7 +130,7 @@ const Review = (props) => {
           style={{marginBottom: '7px'}}
         >
           <Rating name="totalRating" value={starRating} readOnly />
-          <Typography style={{paddingLeft: '10px', fontSize: '14'}}>Generic HeadLine: Fix data Troy</Typography>
+          <Typography style={{paddingLeft: '10px', fontSize: '14'}}>{headline}</Typography>
         </Box>
       <Box
         display="flex"
